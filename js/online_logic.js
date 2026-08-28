@@ -19,8 +19,8 @@ window.saveSettings = async function() {
             },
             body: JSON.stringify({
                 id: examId,
-                settings: CFG,
-                questions: QUESTIONS
+                settings: window.getAppCfg ? window.getAppCfg() : {},
+                questions: window.getAppQuestions ? window.getAppQuestions() : []
             })
         });
         
@@ -86,10 +86,15 @@ window.addEventListener('DOMContentLoaded', async () => {
             if(response.ok) {
                 const data = await response.json();
                 
-                // تحميل الإعدادات والأسئلة من الخادم إلى التطبيق
-                Object.assign(CFG, data.settings);
-                QUESTIONS.length = 0; // مسح الأسئلة الحالية
-                data.questions.forEach(q => QUESTIONS.push(q));
+                // تحميل الإعدادات والأسئلة من الخادم إلى التطبيق باستخدام الدوال المعرضة
+                const appCfg = window.getAppCfg ? window.getAppCfg() : null;
+                const appQs = window.getAppQuestions ? window.getAppQuestions() : null;
+                
+                if (appCfg && appQs) {
+                    Object.assign(appCfg, data.settings);
+                    appQs.length = 0; // مسح الأسئلة الحالية
+                    data.questions.forEach(q => appQs.push(q));
+                }
                 
                 // تفعيل واجهة الطالب وتحديث واجهة المستخدم
                 document.body.style.opacity = '1';
@@ -125,15 +130,16 @@ window.submitExam = async function() {
         const studentName = document.getElementById('inp-name').value.trim();
         const studentClass = document.getElementById('inp-class').value.trim();
         const studentSection = document.getElementById('inp-section').value.trim();
-        const finalScore = parseFloat(document.getElementById('cert-pct').innerText) || 0; // النسبة أو العلامة
-        const totalScore = CFG.totalExamMark || 100;
+        const finalScore = parseFloat(document.getElementById('ring-score').innerText) || 0;
+        const appCfg = window.getAppCfg ? window.getAppCfg() : {totalExamMark: 100};
+        const totalScore = appCfg.totalExamMark || 100;
         
         const submissionData = {
             examId: window.currentOnlineExamId,
             studentName: studentName,
             studentClass: studentClass,
             studentSection: studentSection,
-            score: STUDENT_MARK,
+            score: finalScore,
             totalScore: totalScore,
             answers: window.userAnswers || {} // تأكد من تخزين إجابات الطالب إذا كانت موجودة
         };
