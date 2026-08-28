@@ -1,5 +1,5 @@
-const CACHE_NAME = 'exampro-cache-v1';
-const DYNAMIC_CACHE = 'exampro-dynamic-v1';
+const CACHE_NAME = 'exampro-cache-v2';
+const DYNAMIC_CACHE = 'exampro-dynamic-v2';
 
 // الملفات الأساسية ليتم حفظها مسبقاً
 const STATIC_ASSETS = [
