@@ -1,6 +1,6 @@
 // online_logic.js - ملف المنطق الخاص بربط التطبيق بالخادم
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = window.location.origin + '/api';
 
 // 1. تجاوز دالة حفظ الإعدادات لإرسالها إلى الخادم وتوليد رابط
 const originalSaveSettings = saveSettings;
