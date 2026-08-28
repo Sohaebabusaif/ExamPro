@@ -42,7 +42,7 @@ window.saveSettings = async function() {
                 if (typeof switchSettingsTab === 'function') {
                     switchSettingsTab('tab-publish');
                 }
-                showToast('✅ تم حفظ الامتحان بنجاح!', 'success');
+                window.showToast('✅ تم حفظ الامتحان بنجاح!', 'success');
             } else {
                 alert(`✅ تم حفظ الامتحان أونلاين بنجاح!\n\nشارك هذا الرابط مع الطلاب للدخول للامتحان:\n${examUrl}\n\n(تم نسخ الرابط للحافظة)`);
                 navigator.clipboard.writeText(examUrl);
@@ -61,7 +61,7 @@ window.copyExamLink = function() {
     if(input) {
         input.select();
         document.execCommand('copy');
-        showToast('✅ تم نسخ الرابط!', 'success');
+        window.showToast('✅ تم نسخ الرابط!', 'success');
     }
 };
 
@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 const gearBtn = document.getElementById('gear-btn');
                 if(gearBtn) gearBtn.style.display = 'none';
                 
-                showToast('✅ تم جلب بيانات الامتحان من الخادم بنجاح', 'success');
+                window.showToast('✅ تم جلب بيانات الامتحان من الخادم بنجاح', 'success');
                 
                 // حفظ رقم الامتحان الحالي لإرسال النتائج لاحقاً
                 window.currentOnlineExamId = examId;
@@ -154,13 +154,13 @@ window.submitExam = async function() {
             });
             
             if(response.ok) {
-                showToast('✅ تم إرسال نتيجتك إلى المعلم بنجاح!', 'success');
+                window.showToast('✅ تم إرسال نتيجتك إلى المعلم بنجاح!', 'success');
             } else {
-                showToast('❌ حدث خطأ في إرسال النتيجة', 'error');
+                window.showToast('❌ حدث خطأ في إرسال النتيجة', 'error');
             }
         } catch(err) {
             console.error('Submit API Error:', err);
-            showToast('❌ لا يمكن الاتصال بالخادم أثناء التسليم', 'error');
+            window.showToast('❌ لا يمكن الاتصال بالخادم أثناء التسليم', 'error');
         }
     }
 };
