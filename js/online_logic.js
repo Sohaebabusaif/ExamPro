@@ -1,6 +1,6 @@
 // online_logic.js - ملف المنطق الخاص بربط التطبيق بالخادم
 
-const API_BASE_URL = window.location.origin + '/api';
+const API_BASE_URL = 'https://exampro-kyve.onrender.com/api';
 
 // 1. تجاوز دالة حفظ الإعدادات لإرسالها إلى الخادم وتوليد رابط
 const originalSaveSettings = saveSettings;
