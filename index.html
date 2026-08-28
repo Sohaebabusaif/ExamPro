@@ -51,7 +51,7 @@
       <div class="splash-dev" id="_splash_dev_el" style="letter-spacing:.5px; margin-top: 30px;">EduDesk Solutions &middot; PCX-12</div>
     </div>
   </div>
-  <button type="button" id="gear-btn" class="gear-btn" onclick="openLock()" title="لوحة الإدارة">⚙️</button>
+  <button type="button" id="gear-btn" class="gear-btn" onclick="openLock()" title="لوحة الإدارة" style="display:none;">⚙️</button>
 </div>
 
 <!-- ══════════ SCREEN: STUDENT INFO ══════════ -->
@@ -410,6 +410,7 @@
       <button class="s-tab-btn" onclick="switchSettingsTab('tab-grading')"><i class="fas fa-calculator"></i> العلامات</button>
       <button class="s-tab-btn" onclick="switchSettingsTab('tab-proctoring')"><i class="fas fa-shield-halved"></i> المراقبة والأمان</button>
       <button class="s-tab-btn" onclick="switchSettingsTab('tab-advanced')"><i class="fas fa-cogs"></i> خيارات متقدمة</button>
+      <button class="s-tab-btn" onclick="switchSettingsTab('tab-results')"><i class="fas fa-list-check"></i> سجل النتائج</button>
       <button class="s-tab-btn" onclick="switchSettingsTab('tab-extras')"><i class="fas fa-star"></i> إضافات مميزة</button>
     </div>
 
@@ -598,6 +599,36 @@
       </div>
 
             </div>
+    </div>
+
+    <div class="s-tab-pane" id="tab-results">
+      <div class="s-grid-layout" style="display: block;">
+        <div class="s-section" style="max-width: 100%;">
+          <div class="s-section-title" style="display: flex; justify-content: space-between; align-items: center;">
+            <div><i class="fas fa-list-check"></i>سجل نتائج الطلاب</div>
+            <div>
+              <button class="qm-btn blue" onclick="fetchAndDisplayResults()" style="padding: 6px 12px; font-size: 0.9rem;"><i class="fas fa-sync"></i> تحديث</button>
+              <button class="qm-btn green" onclick="exportResultsCSV()" style="padding: 6px 12px; font-size: 0.9rem; background: var(--green); border-color: var(--green);"><i class="fas fa-file-excel"></i> تصدير CSV</button>
+            </div>
+          </div>
+          <div style="overflow-x: auto; margin-top: 15px;">
+            <table id="results-table" style="width: 100%; text-align: right; border-collapse: collapse; font-size: 0.95rem;">
+              <thead>
+                <tr style="background: var(--bg3); border-bottom: 2px solid var(--border);">
+                  <th style="padding: 10px;">الاسم</th>
+                  <th style="padding: 10px;">الصف</th>
+                  <th style="padding: 10px;">الشعبة</th>
+                  <th style="padding: 10px;">الدرجة</th>
+                  <th style="padding: 10px;">التسليم</th>
+                </tr>
+              </thead>
+              <tbody id="results-tbody">
+                <tr><td colspan="5" style="text-align: center; padding: 20px; color: var(--text3);">اضغط على تحديث لجلب النتائج...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="s-tab-pane" id="tab-advanced">
