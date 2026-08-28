@@ -38,6 +38,10 @@ window.saveSettings = async function() {
                 input.value = examUrl;
                 container.style.display = 'block';
                 
+                // إعادة فتح النافذة في حال تم إغلاقها من الدالة الأصلية
+                const modal = document.getElementById('settings-modal');
+                if(modal) modal.style.display = 'flex';
+                
                 // الانتقال تلقائياً لتبويب النشر
                 if (typeof switchSettingsTab === 'function') {
                     switchSettingsTab('tab-publish');
@@ -60,8 +64,16 @@ window.copyExamLink = function() {
     const input = document.getElementById('exam-link-input');
     if(input) {
         input.select();
-        document.execCommand('copy');
-        window.showToast('✅ تم نسخ الرابط!', 'success');
+        try {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value);
+            } else {
+                document.execCommand('copy');
+            }
+            window.showToast('✅ تم نسخ الرابط!', 'success');
+        } catch (err) {
+            window.showToast('❌ يرجى نسخ الرابط يدوياً', 'error');
+        }
     }
 };
 
