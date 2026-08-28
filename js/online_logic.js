@@ -40,7 +40,10 @@ window.saveSettings = async function() {
                 
                 // إعادة فتح النافذة في حال تم إغلاقها من الدالة الأصلية
                 const modal = document.getElementById('settings-modal');
-                if(modal) modal.style.display = 'flex';
+                if(modal) {
+                    modal.style.display = 'flex';
+                    modal.classList.add('show');
+                }
                 
                 // الانتقال تلقائياً لتبويب النشر
                 if (typeof switchSettingsTab === 'function') {
