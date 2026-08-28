@@ -411,6 +411,7 @@
       <button class="s-tab-btn" onclick="switchSettingsTab('tab-proctoring')"><i class="fas fa-shield-halved"></i> المراقبة والأمان</button>
       <button class="s-tab-btn" onclick="switchSettingsTab('tab-advanced')"><i class="fas fa-cogs"></i> خيارات متقدمة</button>
       <button class="s-tab-btn" onclick="switchSettingsTab('tab-results')"><i class="fas fa-list-check"></i> سجل النتائج</button>
+      <button class="s-tab-btn" onclick="switchSettingsTab('tab-publish')" style="background-color: var(--blue); color: white;"><i class="fas fa-rocket"></i> نشر ومشاركة</button>
       <button class="s-tab-btn" onclick="switchSettingsTab('tab-extras')"><i class="fas fa-star"></i> إضافات مميزة</button>
     </div>
 
@@ -626,6 +627,27 @@
                 <tr><td colspan="5" style="text-align: center; padding: 20px; color: var(--text3);">اضغط على تحديث لجلب النتائج...</td></tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-tab-pane" id="tab-publish">
+      <div class="s-grid-layout" style="display: block;">
+        <div class="s-section" style="max-width: 100%; text-align: center; padding: 40px;">
+          <i class="fas fa-rocket" style="font-size: 4rem; color: var(--blue); margin-bottom: 20px;"></i>
+          <h2>نشر الامتحان ومشاركته</h2>
+          <p style="color: var(--text2); margin-bottom: 30px; margin-top: 10px; font-size: 1.1rem;">عند الانتهاء من كتابة الأسئلة وضبط الإعدادات، اضغط على الزر أدناه لحفظ الامتحان على السيرفر وتوليد الرابط الخاص بالطلاب.</p>
+          <button class="s-btn green" style="padding: 15px 40px; font-size: 1.2rem; border-radius: 8px;" onclick="saveSettings()">💾 حفظ وتوليد رابط الامتحان</button>
+          
+          <div id="publish-link-container" style="display: none; margin-top: 40px; background: var(--bg3); padding: 30px; border-radius: 8px; border: 1px solid var(--border);">
+            <h3 style="color: var(--green); margin-bottom: 10px;">✅ تم إنشاء الرابط بنجاح!</h3>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">قم بنسخ هذا الرابط وأرسله للطلاب للبدء بالامتحان:</p>
+            <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+              <input type="text" id="exam-link-input" readonly style="width: 70%; padding: 12px; border-radius: 5px; border: 1px solid var(--border); text-align: left; direction: ltr; font-size: 1.1rem;" />
+              <button class="s-btn blue" onclick="copyExamLink()" style="padding: 12px 20px; font-size: 1.1rem;"><i class="fas fa-copy"></i> نسخ الرابط</button>
+            </div>
+            <p style="margin-top: 15px; color: var(--text3); font-size: 0.9rem;">(ملاحظة: يمكنك العودة لاحقاً لتبويب "سجل النتائج" لمشاهدة علامات الطلاب)</p>
           </div>
         </div>
       </div>

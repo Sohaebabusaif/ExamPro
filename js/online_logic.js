@@ -31,15 +31,37 @@ window.saveSettings = async function() {
             // حفظ رقم الامتحان لتتمكن نافذة النتائج من استخدامه
             window.currentAdminExamId = data.examId;
             
-            // عرض الرابط للمعلم
-            alert(`✅ تم حفظ الامتحان أونلاين بنجاح!\n\nشارك هذا الرابط مع الطلاب للدخول للامتحان:\n${examUrl}\n\n(تم نسخ الرابط للحافظة)`);
-            navigator.clipboard.writeText(examUrl);
+            // عرض الرابط للمعلم في واجهة النشر بدلاً من Alert
+            const container = document.getElementById('publish-link-container');
+            const input = document.getElementById('exam-link-input');
+            if (container && input) {
+                input.value = examUrl;
+                container.style.display = 'block';
+                
+                // الانتقال تلقائياً لتبويب النشر
+                if (typeof switchSettingsTab === 'function') {
+                    switchSettingsTab('tab-publish');
+                }
+                showToast('✅ تم حفظ الامتحان بنجاح!', 'success');
+            } else {
+                alert(`✅ تم حفظ الامتحان أونلاين بنجاح!\n\nشارك هذا الرابط مع الطلاب للدخول للامتحان:\n${examUrl}\n\n(تم نسخ الرابط للحافظة)`);
+                navigator.clipboard.writeText(examUrl);
+            }
         } else {
             alert('❌ حدث خطأ أثناء الاتصال بالخادم.');
         }
     } catch(err) {
         console.error('API Error:', err);
-        alert('❌ لا يمكن الاتصال بالخادم، تأكد من تشغيل server.js');
+        alert('❌ لا يمكن الاتصال بالخادم، تأكد من تشغيل server.js أو انتظر قليلاً ليعمل السيرفر.');
+    }
+};
+
+window.copyExamLink = function() {
+    const input = document.getElementById('exam-link-input');
+    if(input) {
+        input.select();
+        document.execCommand('copy');
+        showToast('✅ تم نسخ الرابط!', 'success');
     }
 };
 
