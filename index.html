@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="ExamPro Elite">
+<meta property="og:description" content="نظام الامتحانات الإلكتروني المتقدم">
+<meta property="og:type" content="website">
+<!-- sig:PCX12:2LXZh9mK2Kgg2KfYqNmIINiz2YrZgQ==:EduDesk -->
+<!-- sig:PCX12:2LXZh9mK2Kgg2KfYqNmIINiz2YrZgQ==:EduDesk -->
+<meta name="generator" content="ExamPro-PCX12" data-sig="&#x635;&#x647;&#x64a;&#x628;&#x20;&#x627;&#x628;&#x648;&#x20;&#x633;&#x64a;&#x641;">
+<meta name="author" data-dev="&#x635;&#x647;&#x64a;&#x628; &#x627;&#x628;&#x648; &#x633;&#x64a;&#x641;" content="EduDesk-Solutions-PCX12">
+<title>ExamPro Elite — نظام الامتحانات الاحترافي</title>
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ExamPro">
+<link rel="apple-touch-icon" href="icons/icon-192x192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="grid-bg"></div>
+<!-- ═══ PCX-12 Signature Node (protected) ═══ -->
+<div id="_pcx_sig" class="_dev_hidden" aria-hidden="true" data-v="2LXZh9mK2Kgg2KfYqNmIINiz2YrZgQ=="></div>
+
+<!-- ══════════ SCREEN: SPLASH ══════════ -->
+<div id="s-splash" class="screen active">
+  <div style="position:absolute; top:20px; left:20px; display:flex; gap:10px; z-index:10;">
+    <button type="button" class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> <span>الوضع الداكن</span></button>
+  </div>
+  <div style="flex:1; display:flex; align-items:center; justify-content:center; padding: 20px; width: 100%;">
+    <div class="splash-box anim-up" style="text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; max-width: 600px; width: 100%;">
+      <div class="splash-logo-ring" id="splash-ring" style="margin-bottom: 15px;"><span class="logo-icon">🏫</span></div>
+      <div id="splash-school" class="splash-school" style="font-size: 1.4rem; font-weight: 800; color: var(--text2); margin-bottom: 8px;"></div>
+      <h1 class="splash-h1" style="line-height: 1.5; margin-bottom: 12px; font-size: 2.4rem;">نظام <em>الامتحانات</em><br>الإلكتروني المتقدم</h1>
+      <p id="splash-tagline" class="splash-tagline" style="font-size: 1.15rem; font-weight: 600; color: var(--blue2); margin-bottom: 20px;">الإصدار الاحترافي المتقدم للمدارس</p>
+      <p id="splash-teacher" class="splash-teacher" style="margin-bottom: 5px; color: var(--text3); font-weight: 600;"></p>
+      <p id="splash-subject" class="splash-subject" style="margin-bottom: 25px; color: var(--text); font-weight: 700; font-size: 1.1rem;"></p>
+      <div class="splash-info-row" id="splash-chips" style="justify-content:center; gap: 10px; margin-bottom: 25px;"></div>
+      <div id="splash-resume"></div>
+      <button type="button" class="btn-start ripple-btn" onmousedown="createRipple(event)" onclick="goStudent()" style="margin: 0 auto; display:block; padding: 14px 40px; font-size: 1.2rem; border-radius: 50px;">▶ &nbsp;ابدأ الامتحان</button>
+      <div class="splash-dev" id="_splash_dev_el" style="letter-spacing:.5px; margin-top: 30px;">EduDesk Solutions &middot; PCX-12</div>
+    </div>
+  </div>
+  <button type="button" id="gear-btn" class="gear-btn" onclick="openLock()" title="لوحة الإدارة">⚙️</button>
+</div>
+
+<!-- ══════════ SCREEN: STUDENT INFO ══════════ -->
+<div id="s-student" class="screen">
+  <div style="position:absolute; top:20px; left:20px; display:flex; gap:10px; z-index:10;">
+    <button type="button" class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> <span>الوضع الداكن</span></button>
+  </div>
+  <div style="flex:1; display:flex; align-items:center; justify-content:center; padding: 20px; width: 100%;">
+    <div class="student-card">
+      <div class="sc-header">
+        <div class="sc-logo" id="sc-logo-ring"><span style="font-size:28px">🏫</span></div>
+        <div id="sc-school" class="sc-school"></div>
+        <div id="sc-exam-title" class="sc-title">بيانات الطالب</div>
+        <div id="sc-meta" class="sc-meta"></div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">اسم الطالب الرباعي</label>
+        <input type="text" id="inp-name" class="form-input" placeholder="أدخل اسمك الكامل" autocomplete="off">
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">الصف</label>
+          <input type="text" id="inp-class" class="form-input" placeholder="مثال: العاشر أ">
+        </div>
+        <div class="form-field">
+          <label class="form-label">رقم الشعبة</label>
+          <input type="text" id="inp-section" class="form-input" placeholder="مثال: 12">
+        </div>
+      </div>
+      <button type="button" class="btn-primary ripple-btn" onmousedown="createRipple(event)" onclick="beginExam()">🚀 دخول الامتحان</button>
+      <div style="text-align:center;margin-top:12px"><span style="color:var(--text3);font-size:.78rem;cursor:pointer" onclick="goSplash()">← العودة للرئيسية</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN: EXAM ══════════ -->
+<div id="s-exam" class="screen">
+  <!-- Top bar -->
+  <div class="exam-topbar">
+    <div class="etb-left">
+      <div class="etb-school-logo" id="etb-logo"><span style="font-size:16px">🏫</span></div>
+      <div class="etb-info">
+        <div id="etb-exam-name" class="etb-exam-name"></div>
+        <div id="etb-student" class="etb-student"></div>
+      </div>
+      <div class="sync-indicator" id="sync-indicator"><i class="fas fa-cloud-arrow-up"></i> محفوظ</div>
+    </div>
+    <div class="etb-center" id="etb-tools">
+      <button type="button" class="tool-btn theme-toggle" style="border:none" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+      <button type="button" class="tool-btn" onclick="toggleCalc()"><i class="fas fa-calculator"></i><span class="hide-sm">حاسبة</span></button>
+      <button type="button" class="tool-btn" id="btn-grid" onclick="openGrid()"><i class="fas fa-th-large"></i><span class="hide-sm">خريطة</span></button>
+      <div id="ans-counter" class="answered-counter">
+        <i class="fas fa-check-circle" style="color:var(--green);font-size:.8rem"></i>
+        <span id="ans-count-val">0</span>/<span id="ans-count-tot">0</span>
+      </div>
+    </div>
+    <div class="etb-right">
+      <div class="progress-pill">
+        <i class="fas fa-layer-group" style="color:var(--text3);font-size:.75rem"></i>
+        <span class="prog-frac"><span id="q-cur">1</span>/<span id="q-tot">0</span></span>
+      </div>
+      <div class="timer-widget" id="timer-widget">
+        <div class="timer-label">⏱ الوقت المتبقي</div>
+        <div class="timer-val" id="timer-val">00:00:00</div>
+      </div>
+    </div>
+  </div>
+  <!-- Progress strip -->
+  <div class="exam-progress-strip"><div class="exam-progress-fill" id="prog-fill" style="width:0%"></div></div>
+  <!-- Body -->
+  <div class="exam-body" id="exam-body">
+    <div class="q-card" id="q-card"></div>
+  </div>
+  <!-- Footer -->
+  <div class="exam-footer">
+    <div class="ef-nav">
+      <button type="button" class="ef-btn" id="btn-prev" onclick="prevQ()" disabled>→ السابق</button>
+    </div>
+    <div style="flex:1;max-width:400px;margin:0 auto;text-align:center">
+      <div style="background:var(--bg3);border-radius:50px;height:6px;overflow:hidden;margin-bottom:6px">
+        <div id="footer-prog" style="height:100%;background:linear-gradient(90deg,var(--blue3),var(--blue));border-radius:50px;transition:width .4s"></div>
+      </div>
+      <div style="font-size:.62rem;color:var(--text3);font-weight:600">⌨ اضغط 1-4 للإجابة · ← → للتنقل · F للتحديد</div>
+    </div>
+    <div class="ef-nav">
+      <button type="button" class="ef-btn danger" onclick="confirmSubmit()" id="btn-submit-top" style="display:none">تسليم</button>
+      <button type="button" class="ef-btn primary" id="btn-next" onclick="nextQ()">← التالي</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHEAT OVERLAY -->
+<div class="cheat-overlay" id="cheat-overlay">
+  <div class="cheat-box">
+    <div class="cheat-icon">🚨</div>
+    <div class="cheat-title">تحذير: تم رصد محاولة مخالفة!</div>
+    <div class="cheat-msg">تم اكتشاف سلوك غير مسموح به.<br>هذا الحدث سُجِّل وسيُبلَّغ عنه للمعلم في الشهادة.</div>
+    <div class="cheat-count" id="cheat-count-msg"></div>
+    <button type="button" class="cheat-back-btn" onclick="dismissCheat()">العودة الفورية للامتحان 🔒</button>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN: RESULTS ══════════ -->
+<div id="s-results" class="screen">
+  <div class="results-wrap">
+    <div id="results-printzone">
+      <!-- Certificate -->
+      <div class="result-cert" id="cert-card">
+        <div class="cert-watermark"><i class="fas fa-graduation-cap"></i></div>
+        <div class="cert-top-bar"></div>
+        <div class="cert-body">
+          <!-- Header -->
+          <div class="cert-hdr">
+            <div class="cert-logo-name">
+              <div class="cert-logo" id="cert-logo-box"><span style="font-size:26px">🏫</span></div>
+              <div>
+                <div class="cert-h1">شهادة تقييم أكاديمي</div>
+                <div id="cert-h2" class="cert-h2"></div>
+                <div id="cert-h3" class="cert-h3"></div>
+              </div>
+            </div>
+            <div class="cert-date-ref">
+              <div class="date" id="cert-date-val"></div>
+              <div class="ref" id="cert-ref-val"></div>
+              <div style="margin-top:6px;font-size:.68rem;color:var(--green);font-weight:700"><i class="fas fa-shield-check"></i> موثق رقمياً</div>
+            </div>
+          </div>
+          <!-- Student -->
+          <div class="cert-student-block">
+            <div class="cert-student-label">يُشهد بأن الطالب / ـة</div>
+            <div id="cert-student-name" class="cert-student-name"></div>
+            <div id="cert-student-meta" class="cert-student-meta"></div>
+          </div>
+          <!-- Scores -->
+          <div class="cert-score-row">
+            <div class="grade-ring-wrap">
+              <svg viewBox="0 0 160 160" width="160" height="160">
+                <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="13"/>
+                <circle id="grade-ring-circle" cx="80" cy="80" r="68" fill="none" stroke="var(--blue)" stroke-width="13" stroke-linecap="round" stroke-dasharray="427.26" stroke-dashoffset="427.26" style="transition:stroke-dashoffset 1.2s ease"/>
+              </svg>
+              <div class="grade-ring-inner">
+                <div class="grade-big" id="ring-score">0</div>
+                <div class="grade-sub" id="ring-total">/ 0</div>
+              </div>
+            </div>
+            <div class="cert-score-vals">
+              <div id="cert-pct" class="score-pct">0%</div>
+              <div id="cert-grade-letter" class="score-letter-grade A">—</div>
+              <div id="cert-pass-badge" class="cert-badge pass">—</div>
+            </div>
+          </div>
+          <!-- Stats -->
+          <div class="cert-stats">
+            <div class="stat-box s-correct"><div id="st-correct" class="stat-val">0</div><div class="stat-lbl">✅ صحيح</div></div>
+            <div class="stat-box s-wrong"><div id="st-wrong" class="stat-val">0</div><div class="stat-lbl">❌ خطأ</div></div>
+            <div class="stat-box s-empty"><div id="st-empty" class="stat-val">0</div><div class="stat-lbl">⬜ بدون إجابة</div></div>
+            <div class="stat-box s-time"><div id="st-time" class="stat-val">—</div><div class="stat-lbl">⏱ الوقت المستغرق</div></div>
+            <div class="stat-box" style="background:rgba(139,92,246,.08);border-color:rgba(139,92,246,.25)"><div id="st-avg-time" class="stat-val" style="color:var(--purple)">—</div><div class="stat-lbl">⚡ متوسط/سؤال</div></div>
+            <div class="stat-box" style="background:rgba(6,182,212,.06);border-color:rgba(6,182,212,.2)"><div id="st-accuracy" class="stat-val" style="color:var(--cyan)">—</div><div class="stat-lbl">🎯 دقة الإجابات</div></div>
+          </div>
+          <!-- Grade scale -->
+          <div class="grade-scale-box">
+            <div class="gs-title">سلم التقييم المعتمد</div>
+            <div class="gs-chips">
+              <span class="gs-chip" style="background:rgba(16,185,129,.15);color:var(--green2)">A+ ≥ 95%</span>
+              <span class="gs-chip" style="background:rgba(16,185,129,.1);color:var(--green)">A ≥ 90%</span>
+              <span class="gs-chip" style="background:rgba(59,130,246,.15);color:var(--blue2)">B+ ≥ 85%</span>
+              <span class="gs-chip" style="background:rgba(59,130,246,.1);color:#93c5fd">B ≥ 75%</span>
+              <span class="gs-chip" style="background:rgba(245,158,11,.15);color:var(--gold)">C+ ≥ 65%</span>
+              <span class="gs-chip" style="background:rgba(245,158,11,.1);color:var(--gold2)">C ≥ 55%</span>
+              <span class="gs-chip" style="background:rgba(234,88,12,.15);color:#fb923c">D ≥ 50%</span>
+              <span class="gs-chip" style="background:rgba(239,68,68,.12);color:var(--red2)">F &lt; 50%</span>
+            </div>
+          </div>
+          <!-- Footer sig -->
+          <div class="cert-footer">
+            <div class="cert-teacher-sig">
+              <div class="ct-label">أستاذ المادة المعتمد</div>
+              <div id="cert-teacher" class="ct-name"></div>
+              <button class="settings-opt-row" onclick="showPrintModal()">
+                <span>🖨️ طباعة الامتحان (ورقي)</span>
+                <i class="fas fa-print"></i>
+            </button>
+            <div class="ct-line"></div>
+            </div>
+            <div class="cert-stamp">
+              <i class="fas fa-certificate"></i>
+              <div class="stamp-txt">تقييم<br>معتمد</div>
+            </div>
+            <div class="cert-dev-sig">
+              <div style="color:var(--text3);font-size:.7rem">EduDesk Solutions</div>
+              <div style="color:var(--text3);font-size:.7rem">PCX-12</div>
+              <!-- sig:&#x635;&#x647;&#x64a;&#x628;&#x20;&#x627;&#x628;&#x648;&#x20;&#x633;&#x64a;&#x641; -->
+              <div style="color:var(--text3);font-size:.7rem">تطوير محلي</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Performance Bar -->
+      <div id="perf-bar" class="no-print" style="background:var(--card);border:1px solid var(--border2);border-radius:var(--radius2);padding:20px 28px;margin-bottom:20px;display:none">
+        <div style="font-size:.8rem;font-weight:800;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">📊 تحليل الأداء</div>
+        <div id="perf-bar-inner"></div>
+      </div>
+      <!-- Review Section -->
+      <div class="review-section" id="review-section" style="display:none">
+        <div class="review-hdr">
+          <div class="review-title"><i class="fas fa-list-check" style="color:var(--blue2)"></i>مراجعة الإجابات التفصيلية</div>
+          <div class="review-stats">
+            <span style="color:var(--green2)"><i class="fas fa-check"></i> <span id="rv-correct">0</span></span>
+            <span style="color:var(--red2)"><i class="fas fa-times"></i> <span id="rv-wrong">0</span></span>
+          </div>
+        </div>
+        <div class="review-list" id="review-list"></div>
+      </div>
+    </div>
+    <!-- Proctoring Report (injected by JS) -->
+    <div id="proctor-report-wrap" class="proctor-report-wrap" style="display:none">
+      <div class="review-section" style="display:block">
+        <div class="review-hdr" style="background:rgba(139,92,246,.08);border-bottom-color:rgba(139,92,246,.3)">
+          <div class="review-title" style="color:var(--purple)"><i class="fas fa-shield-check"></i> تقرير المراقبة الإلكترونية</div>
+          <div class="review-stats"><span id="proctor-summary-text">جاري التحليل...</span></div>
+        </div>
+        <div style="padding:16px">
+          <div class="proctor-stat-mini">
+            <div class="psm-box"><div class="psm-val" id="pr-snaps" style="color:var(--blue2)">0</div><div class="psm-lbl">لقطة</div></div>
+            <div class="psm-box"><div class="psm-val" id="pr-faces" style="color:var(--gold)">0</div><div class="psm-lbl">تنبيه وجه</div></div>
+            <div class="psm-box"><div class="psm-val" id="pr-noise" style="color:var(--purple)">0</div><div class="psm-lbl">تنبيه صوت</div></div>
+            <div class="psm-box"><div class="psm-val" id="pr-ext" style="color:var(--red2)">0</div><div class="psm-lbl">تدخل خارجي</div></div>
+          </div>
+          <p style="font-size:.78rem;font-weight:700;color:var(--text3);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.5px">📸 لقطات الكاميرا الصامتة</p>
+          <div class="proctor-snaps" id="proctor-snaps-grid"><span style="font-size:.78rem;color:var(--text3)">لم تُلتقط لقطات.</span></div>
+          <p style="font-size:.78rem;font-weight:700;color:var(--text3);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.5px">🚨 سجل أحداث الغش</p>
+          <div id="proctor-events-list"><span style="font-size:.78rem;color:var(--text3)">لا توجد أحداث مسجلة.</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- Actions -->
+    <div class="result-actions">
+      <button type="button" class="ra-btn primary" onclick="captureScreenshot()"><i class="fas fa-camera"></i> حفظ صورة</button>
+      <button type="button" class="ra-btn gold" onclick="printResults()"><i class="fas fa-print"></i> طباعة / PDF</button>
+      <button type="button" class="ra-btn" onclick="shareResults()"><i class="fas fa-share-alt"></i> مشاركة</button>
+      <button type="button" class="ra-btn" onclick="newStudent()"><i class="fas fa-user-plus"></i> طالب جديد</button>
+      <button type="button" class="ra-btn" onclick="goSplash()"><i class="fas fa-home"></i> الرئيسية</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PROCTORING OVERLAYS ══════════ -->
+<div id="ext-block-wall">
+  <i class="fas fa-shield-halved" style="font-size:5rem;margin-bottom:1rem;color:#f87171"></i>
+  <h1>⚠ تدخل خارجي محظور!</h1>
+  <p>تم رصد امتداد برمجي (ترجمة / استخراج / حقن) يحاول التلاعب ببيئة الامتحان. تم تجميد الجلسة وتسجيل الحادثة تلقائياً.</p>
+  <p style="margin-top:12px;font-size:.85rem;color:#fca5a5">الرجاء تعطيل جميع إضافات المتصفح وتحديث الصفحة.</p>
+</div>
+<div id="dyn-watermark"></div>
+<div id="webcam-pip">
+  <video id="webcam-video" autoplay muted playsinline></video>
+  <div id="webcam-pip-bar"><i class="fas fa-video"></i> مراقَب · <span id="snap-count">0</span> لقطة</div>
+</div>
+<div id="mic-vumeter">
+  <i class="fas fa-microphone" id="mic-icon-el" style="font-size:9px;color:var(--text3)"></i>
+  <div id="mic-bar-bg"><div id="mic-bar-fill" style="height:0%"></div></div>
+</div>
+<canvas id="snap-cvs" width="320" height="240"></canvas>
+
+<!-- ══════════ SCREEN: INSTRUCTIONS ══════════ -->
+<div id="s-instructions" class="screen">
+  <div class="grid-bg"></div>
+  <div class="inst-wrap anim-up">
+    <div class="inst-header">
+      <div class="inst-avatar" id="inst-logo-box"><i class="fas fa-clipboard-list" style="color:var(--blue2)"></i></div>
+      <div class="inst-title">تعليمات وقواعد الامتحان</div>
+      <div class="inst-subtitle">يرجى قراءة جميع القواعد بعناية قبل البدء</div>
+      <div class="inst-student-chip"><i class="fas fa-user-graduate"></i> <span id="inst-student-name">الطالب</span></div>
+    </div>
+
+    <!-- Exam Summary Stats -->
+    <div class="inst-summary-grid">
+      <div class="inst-stat-card">
+        <div class="inst-stat-icon">❓</div>
+        <div class="inst-stat-val" id="inst-q-count" style="color:var(--blue2)">—</div>
+        <div class="inst-stat-lbl">عدد الأسئلة</div>
+      </div>
+      <div class="inst-stat-card">
+        <div class="inst-stat-icon">⏱</div>
+        <div class="inst-stat-val" id="inst-time-val" style="color:var(--gold)">—</div>
+        <div class="inst-stat-lbl">الوقت المتاح</div>
+      </div>
+      <div class="inst-stat-card">
+        <div class="inst-stat-icon">⭐</div>
+        <div class="inst-stat-val" id="inst-total-mark" style="color:var(--green2)">—</div>
+        <div class="inst-stat-lbl">العلامة الكلية</div>
+      </div>
+      <div class="inst-stat-card">
+        <div class="inst-stat-icon">🎯</div>
+        <div class="inst-stat-val" id="inst-pass-mark" style="color:var(--purple)">—</div>
+        <div class="inst-stat-lbl">علامة النجاح</div>
+      </div>
+    </div>
+
+    <!-- Rules Card -->
+    <div class="inst-rules-card">
+      <div class="inst-rules-title"><i class="fas fa-list-check"></i> قواعد الامتحان والتعليمات العامة</div>
+      <div id="inst-rules-list"></div>
+    </div>
+
+    <!-- Proctoring Card (Conditional) -->
+    <div class="inst-proctor-card" id="inst-proctor-card">
+      <div class="inst-proctor-title"><i class="fas fa-shield-halved"></i> نظام المراقبة الإلكترونية النشطة</div>
+      <p style="font-size:.82rem;color:var(--text2);margin-bottom:14px;line-height:1.65">سيُفعَّل النظام أدناه طوال مدة الامتحان. أي محاولة للتحايل ستُسجَّل وتُرفق في تقرير النتيجة.</p>
+      <div class="inst-proctor-grid" id="inst-proctor-grid"></div>
+    </div>
+
+    <!-- Agree & Start -->
+    <label class="inst-agree-row" style="cursor: pointer; display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+      <input type="checkbox" id="inst-agree-cb" onchange="document.getElementById('btn-inst-start').disabled=!this.checked" style="width: 20px; height: 20px; cursor: pointer;">
+      <span style="font-size: 1rem; color: var(--text2); line-height: 1.5;">أقرّ بأنني قرأت جميع التعليمات وأوافق على الالتزام بها وأنني أؤدي هذا الامتحان بنفسي.</span>
+    </label>
+    <button type="button" class="btn-inst-start" id="btn-inst-start" disabled onclick="actuallyStartExam()">
+      <i class="fas fa-play-circle"></i> ابدأ الامتحان الآن
+    </button>
+    <div style="text-align:center;margin-top:14px">
+      <button type="button" onclick="goStudent()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:600">← العودة لتعديل البيانات</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN: SETTINGS LOCK ══════════ -->
+<div id="s-lock" class="screen">
+  <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:100%;min-height:100vh;padding:24px">
+    <div class="lock-box">
+      <div class="lock-icon"><i class="fas fa-shield-halved"></i></div>
+      <div class="lock-title">لوحة الإدارة</div>
+      <div class="lock-sub">أدخل كلمة مرور المعلم للوصول إلى الإعدادات</div>
+      <input type="password" id="lock-pass-inp" class="lock-input" placeholder="• • • • • • • •" onkeydown="if(event.key==='Enter')checkLockPass()">
+      <div class="lock-error" id="lock-err"></div>
+      <button type="button" class="lock-btn" onclick="checkLockPass()">🔓 دخول</button>
+      <div class="lock-cancel" onclick="goSplash()">← إلغاء والعودة</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN: SETTINGS ══════════ -->
+<div id="s-settings" class="screen">
+  <div class="settings-bar">
+    <span style="font-size:1.3rem">⚙️</span>
+    <div class="settings-title">لوحة إعدادات النظام</div>
+    <button type="button" class="qm-btn blue" onclick="showScreen('s-questions')">📝 إدارة الأسئلة</button>
+    <button type="button" class="qm-btn gray" onclick="saveSettings()">💾 حفظ</button>
+    <button type="button" class="qm-btn gray" onclick="goSplash()" style="border-color:var(--red);color:var(--red)">✕ إغلاق</button>
+  </div>
+  <div class="settings-body">
+
+    <div class="s-tabs-nav">
+      <button class="s-tab-btn active" onclick="switchSettingsTab('tab-general')"><i class="fas fa-school"></i> عام</button>
+      <button class="s-tab-btn" onclick="switchSettingsTab('tab-grading')"><i class="fas fa-calculator"></i> العلامات</button>
+      <button class="s-tab-btn" onclick="switchSettingsTab('tab-proctoring')"><i class="fas fa-shield-halved"></i> المراقبة والأمان</button>
+      <button class="s-tab-btn" onclick="switchSettingsTab('tab-advanced')"><i class="fas fa-cogs"></i> خيارات متقدمة</button>
+      <button class="s-tab-btn" onclick="switchSettingsTab('tab-extras')"><i class="fas fa-star"></i> إضافات مميزة</button>
+    </div>
+
+    <div class="s-tab-pane active" id="tab-general">
+      <div class="s-grid-layout">
+        <!-- SCHOOL INFO -->
+      <div class="s-section">
+        <div class="s-section-title"><i class="fas fa-school"></i>معلومات المدرسة والامتحان</div>
+        <!-- Logo -->
+        <div class="logo-upload-area" onclick="document.getElementById('logo-file-inp').click()">
+          <div class="logo-preview-ring" id="logo-preview-el"><span style="font-size:24px">🏫</span></div>
+          <div class="logo-upload-text">انقر لرفع شعار المدرسة</div>
+          <div class="logo-upload-hint">PNG / JPG — يُفضَّل صورة مربعة</div>
+        </div>
+        <input type="file" id="logo-file-inp" accept="image/*" style="display:none" onchange="handleLogoUpload(event)">
+        <div class="s-row"><label class="s-label">اسم المدرسة</label><input type="text" id="s-school-name" class="s-input" placeholder="مدرسة..."></div>
+        <div class="s-row"><label class="s-label">اسم المعلم</label><input type="text" id="s-teacher-name" class="s-input" placeholder="أ. ..."></div>
+        <div class="s-row"><label class="s-label">اسم المادة</label><input type="text" id="s-subject-name" class="s-input" placeholder="الرياضيات..."></div>
+        <div class="s-row"><label class="s-label">عنوان الامتحان</label><input type="text" id="s-exam-title" class="s-input" placeholder="امتحان الفصل الأول..."></div>
+        <div class="s-row"><label class="s-label">🎨 اللون المخصص لهوية المدرسة</label><input type="color" id="s-theme-color" value="#3b82f6" class="s-input" style="padding:0; height:38px; cursor:pointer;" onchange="document.documentElement.style.setProperty('--blue', this.value); document.documentElement.style.setProperty('--blue2', this.value);"></div>
+      </div>
+
+      </div>
+    </div>
+
+    <div class="s-tab-pane" id="tab-grading">
+      <div class="s-grid-layout">
+      <!-- MARKS CALCULATOR -->
+      <div class="s-section">
+        <div class="s-section-title"><i class="fas fa-calculator"></i>إعدادات العلامات المتقدمة</div>
+        <div class="marks-calc-box">
+          <div class="mc-label">🧮 نظام حساب العلامات</div>
+          <div class="s-row" style="margin-bottom:10px;">
+            <label class="s-label">طريقة الحساب:</label>
+            <select id="s-calc-mode" class="s-select" onchange="toggleCalcMode()">
+              <option value="total">تحديد العلامة الكلية (تُقسم على الأسئلة)</option>
+              <option value="per_q">تحديد علامة لكل سؤال (تُضرب بالأسئلة)</option>
+            </select>
+          </div>
+          <div class="mc-row" style="grid-template-columns: 1fr 1fr;">
+            <div class="mc-field">
+              <label id="lbl-total-mark">العلامة الكلية للامتحان</label>
+              <input type="number" id="s-total-exam-mark" value="100" min="1" step="0.5" oninput="updateMarksCalc()">
+            </div>
+            <div class="mc-field">
+              <label id="lbl-mark-per-q">علامة السؤال الواحد</label>
+              <input type="number" id="s-calc-mark-per-q" value="5" step="0.25" min="0.25" oninput="updateMarksCalc()">
+            </div>
+          </div>
+          <div class="mc-result" style="margin-top:10px;">
+            <div class="mc-total" id="mc-total">100</div>
+            <div class="mc-sub">العلامة الكلية للامتحان المتوقعة</div>
+            <div style="font-size:.72rem;color:var(--text3);margin-top:4px">علامة النجاح المحددة: <span id="mc-pass" style="color:var(--green);font-weight:700">50</span></div>
+          </div>
+        </div>
+        <div class="s-row"><label class="s-label">درجة النجاح المئوية (%)</label><input type="number" id="s-pass-pct" class="s-input" value="50" min="1" max="100" style="max-width:90px" oninput="updateMarksCalc()"></div>
+        <div class="s-row"><label class="s-label">عدد الأسئلة المعروضة في الامتحان</label>
+          <select id="s-display-count" class="s-select" style="max-width:140px" onchange="updateMarksCalc()">
+            <option value="10">10 أسئلة</option><option value="15">15 سؤال</option>
+            <option value="20" selected>20 سؤال</option><option value="25">25 سؤال</option>
+            <option value="30">30 سؤال</option><option value="40">40 سؤال</option>
+            <option value="50">50 سؤال</option><option value="75">75 سؤال</option>
+            <option value="100">100 سؤال</option><option value="all">كل الأسئلة المتاحة</option>
+          </select>
+        </div>
+        
+        <!-- NEGATIVE MARKING FEATURE -->
+        <div style="border-top:1px dashed var(--border); padding-top: 14px; margin-top: 14px;">
+          <div class="s-row"><label class="s-label" style="color:var(--red2)">⛔ خصم علامات للإجابات الخاطئة</label><label class="toggle"><input type="checkbox" id="s-neg-mark" onchange="document.getElementById('s-neg-pen').disabled = !this.checked"><span class="tslider"></span></label></div>
+          <div class="s-row"><label class="s-label">مقدار الخصم من علامة السؤال</label>
+            <select id="s-neg-pen" class="s-select" style="max-width:140px" disabled>
+              <option value="0.25">ربع علامة السؤال</option>
+              <option value="0.33">ثلث علامة السؤال</option>
+              <option value="0.5">نصف علامة السؤال</option>
+              <option value="1">كامل علامة السؤال</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIME SETTINGS -->
+      <div class="s-section">
+        <div class="s-section-title"><i class="fas fa-clock"></i>إعدادات الوقت والتوقيت</div>
+        <div class="s-row"><label class="s-label">مدة الامتحان (دقيقة)</label><input type="number" id="s-timer-mins" class="s-input" value="30" min="1" max="300" style="max-width:90px"></div>
+        <div class="s-row"><label class="s-label">تعطيل الوقت (امتحان مفتوح)</label><label class="toggle"><input type="checkbox" id="s-no-timer" onchange="document.getElementById('s-timer-mins').disabled=this.checked"><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">تحذير عند 30 دقيقة متبقية</label><label class="toggle"><input type="checkbox" id="s-warn-30" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">تحذير عند 15 دقيقة متبقية</label><label class="toggle"><input type="checkbox" id="s-warn-15" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">تحذير عند 10 دقائق متبقية</label><label class="toggle"><input type="checkbox" id="s-warn-10" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">تحذير عند 5 دقائق متبقية</label><label class="toggle"><input type="checkbox" id="s-warn-5" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">تحذير عند 1 دقيقة متبقية</label><label class="toggle"><input type="checkbox" id="s-warn-1" checked><span class="tslider"></span></label></div>
+      </div>
+
+      <!-- EXAM BEHAVIOR -->
+      <div class="s-section">
+        <div class="s-section-title"><i class="fas fa-cogs"></i>سلوك الامتحان</div>
+        <div class="s-row"><label class="s-label">🔀 خلط ترتيب الأسئلة</label><label class="toggle"><input type="checkbox" id="s-shuffle-q" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label" style="color:var(--gold)">🎯 سحب عشوائي موزون للأسئلة (حسب الفئات)</label><label class="toggle"><input type="checkbox" id="s-smart-pooling"><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">🔄 خلط ترتيب الخيارات</label><label class="toggle"><input type="checkbox" id="s-shuffle-o" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">⚡ انتقال تلقائي بعد اختيار إجابة</label><label class="toggle"><input type="checkbox" id="s-auto-advance"><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">🔙 السماح بالرجوع للسؤال السابق</label><label class="toggle"><input type="checkbox" id="s-allow-back" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">🤔 إظهار سؤال "مدى الثقة" بعد اختيار الإجابة</label><label class="toggle"><input type="checkbox" id="s-show-confidence"><span class="tslider"></span></label></div>
+        <div style="border-top:1px dashed var(--border); padding-top: 14px; margin-top: 14px;">
+          <div class="s-row"><label class="s-label">📋 إظهار مراجعة الإجابات في النتيجة</label><label class="toggle"><input type="checkbox" id="s-show-review" checked><span class="tslider"></span></label></div>
+          <div class="s-row"><label class="s-label">🔁 تفعيل زر "أعد المحاولة" لتصحيح الأخطاء</label><label class="toggle"><input type="checkbox" id="s-allow-retry" checked><span class="tslider"></span></label></div>
+        </div>
+        
+        <div class="s-row" style="margin-top: 14px;"><label class="s-label">📌 تفعيل تحديد الأسئلة للمراجعة</label><label class="toggle"><input type="checkbox" id="s-allow-flag" checked><span class="tslider"></span></label></div>
+      </div>
+
+            </div>
+    </div>
+
+    <div class="s-tab-pane" id="tab-proctoring">
+      <div class="s-grid-layout">
+      <!-- ANTI-CHEAT -->
+      <div class="s-section">
+        <div class="s-section-title"><i class="fas fa-shield-halved"></i>منع الغش والأمان</div>
+        <div class="s-row"><label class="s-label">🔒 منع مغادرة نافذة الامتحان والنسخ</label><label class="toggle"><input type="checkbox" id="s-prevent-leave" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">🖥️ الشاشة الكاملة إجبارياً</label><label class="toggle"><input type="checkbox" id="s-force-fullscreen" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">🖱️ تحذير عند خروج الماوس من الشاشة</label><label class="toggle"><input type="checkbox" id="s-mouse-warn" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">🚫 تعطيل كليك اليمين</label><label class="toggle"><input type="checkbox" id="s-no-right" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">🔑 تعطيل F12 وأدوات المطور</label><label class="toggle"><input type="checkbox" id="s-no-devtools" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">📸 تصوير تلقائي لنتيجة الطالب</label><label class="toggle"><input type="checkbox" id="s-auto-ss" checked><span class="tslider"></span></label></div>
+        <div class="s-row"><label class="s-label">⚠️ عدد التحذيرات قبل الإنهاء التلقائي</label><input type="number" id="s-cheat-limit" class="s-input" value="3" min="1" max="10" style="max-width:70px"></div>
+      </div>
+
+      <!-- ADVANCED PROCTORING -->
+      <div class="s-section" style="border:1px solid rgba(139,92,246,.25);background:linear-gradient(135deg,rgba(139,92,246,.05),rgba(59,130,246,.04))">
+        <div class="s-section-title" style="color:var(--purple)"><i class="fas fa-eye"></i>المراقبة الإلكترونية المتقدمة</div>
+        <p style="font-size:.78rem;color:var(--text3);margin-bottom:16px;line-height:1.6">تستلزم هذه الميزات إذن الكاميرا والميكروفون من المتصفح. ستظهر رسالة طلب الإذن عند بدء الامتحان.</p>
+
+        <div class="s-row">
+          <div style="flex:1">
+            <label class="s-label" style="color:var(--blue2)">📷 مراقبة الكاميرا (لقطات صامتة)</label>
+            <div style="font-size:.72rem;color:var(--text3);margin-top:2px">تظهر الكاميرا في زاوية الشاشة وتلتقط صوراً صامتة دورية تُعرض في تقرير النتيجة</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-enable-webcam" checked><span class="tslider"></span></label>
+        </div>
+
+        <div class="s-row" style="padding-right:16px">
+          <label class="s-label" style="font-size:.8rem">فترة الالتقاط (ثانية)</label>
+          <select id="s-snap-interval" class="s-select" style="max-width:130px">
+            <option value="30">كل 30 ثانية</option>
+            <option value="60" selected>كل دقيقة</option>
+            <option value="120">كل دقيقتين</option>
+            <option value="180">كل 3 دقائق</option>
+          </select>
+        </div>
+
+        <div class="s-row" style="margin-top:8px">
+          <div style="flex:1">
+            <label class="s-label" style="color:var(--purple)">🤖 كشف الوجه بالذكاء الاصطناعي (face-api)</label>
+            <div style="font-size:.72rem;color:var(--text3);margin-top:2px">يُحلَّل إطار الكاميرا كل 5 ثوانٍ — غياب الوجه أو تعدده يُشغّل تحذير غش فورياً</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-enable-facetrack" checked><span class="tslider"></span></label>
+        </div>
+
+        <div class="s-row" style="margin-top:8px">
+          <div style="flex:1">
+            <label class="s-label" style="color:var(--cyan)">🎤 مراقبة الميكروفون (كشف الهمس)</label>
+            <div style="font-size:.72rem;color:var(--text3);margin-top:2px">يقيس النظام مستوى الضجيج — همس أو كلام لأكثر من 3 ثوانٍ متواصلة = تحذير غش</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-enable-mic" checked><span class="tslider"></span></label>
+        </div>
+
+        <div class="s-row" style="margin-top:8px">
+          <div style="flex:1">
+            <label class="s-label" style="color:var(--gold)">💧 العلامة المائية الديناميكية</label>
+            <div style="font-size:.72rem;color:var(--text3);margin-top:2px">اسم الطالب + رقم الجلسة + الوقت الحي فوق الشاشة — تُفضح أي محاولة لتصوير الشاشة</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-enable-watermark" checked><span class="tslider"></span></label>
+        </div>
+
+        <div class="s-row" style="margin-top:8px">
+          <div style="flex:1">
+            <label class="s-label" style="color:var(--red2)">🛡 جدار حماية DOM (Extension Blocker)</label>
+            <div style="font-size:.72rem;color:var(--text3);margin-top:2px">يرصد أي امتداد يحاول حقن scripts (ترجمة، GPT، Grammarly) ويحظره فوراً</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-enable-extblock" checked><span class="tslider"></span></label>
+        </div>
+
+        <div style="margin-top:16px;padding:12px;background:rgba(0,0,0,.2);border-radius:10px;font-size:.75rem;color:var(--text3);line-height:1.65;border:1px solid rgba(139,92,246,.15)">
+          <i class="fas fa-info-circle" style="color:var(--purple);margin-left:5px"></i>
+          <strong style="color:var(--text2)">ملاحظة:</strong> جميع بيانات المراقبة (اللقطات، سجل الأحداث) تُخزَّن محلياً في المتصفح فقط ولا تُرسَل لأي جهة خارجية.
+        </div>
+      </div>
+
+            </div>
+    </div>
+
+    <div class="s-tab-pane" id="tab-advanced">
+      <div class="s-grid-layout">
+      <!-- PASSWORD -->
+      <div class="s-section">
+        <div class="s-section-title"><i class="fas fa-key"></i>كلمة المرور</div>
+        <div class="s-row"><label class="s-label">كلمة المرور الحالية</label><input type="password" id="s-old-pass" class="s-input" placeholder="••••••••"></div>
+        <div class="s-row"><label class="s-label">كلمة المرور الجديدة</label><input type="password" id="s-new-pass" class="s-input" placeholder="••••••••"></div>
+        <div class="s-row"><label class="s-label">تأكيد كلمة المرور</label><input type="password" id="s-confirm-pass" class="s-input" placeholder="••••••••"></div>
+        <button type="button" class="s-save-btn gold" onclick="changePassword()"><i class="fas fa-key"></i>تغيير كلمة المرور</button>
+      </div>
+
+      <!-- SAVE / RESET -->
+      <div class="s-section">
+        <div class="s-section-title"><i class="fas fa-floppy-disk"></i>حفظ وإدارة</div>
+        <p style="color:var(--text2);font-size:.84rem;line-height:1.7;margin-bottom:14px">بعد الحفظ ستُطبَّق جميع التغييرات على الامتحان القادم.</p>
+        <button type="button" class="s-save-btn green" onclick="saveSettings()"><i class="fas fa-save"></i>حفظ جميع الإعدادات</button>
+        <button type="button" class="s-save-btn red" style="margin-top:8px" onclick="resetAll()"><i class="fas fa-trash"></i>إعادة ضبط المصنع</button>
+      </div>
+    </div>
+    
+    <!-- RESULTS ARCHIVE -->
+    <div class="s-section full-width">
+      <div class="s-section-title" style="justify-content:space-between">
+        <span><i class="fas fa-database"></i> سجل نتائج الطلاب المحفوظة محلياً</span>
+        <div>
+          <button type="button" class="qm-btn green" onclick="exportResultsCSV()"><i class="fas fa-file-excel"></i> تصدير Excel</button>
+          <button type="button" class="qm-btn red" onclick="clearResultsArchive()"><i class="fas fa-trash"></i> مسح السجل</button>
+        </div>
+      </div>
+      <p style="color:var(--text2);font-size:.8rem;margin-bottom:15px">تُحفظ هنا نتائج جميع الطلاب الذين أجروا الامتحان على هذا المتصفح/الجهاز تلقائياً.</p>
+      <div class="res-table-wrap">
+        <table class="res-table" id="res-archive-table">
+          <thead><tr><th>التاريخ والوقت</th><th>اسم الطالب</th><th>الصف والشعبة</th><th>العلامة</th><th>النسبة</th><th>مخالفات الغش</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+      </div>
+    </div>
+
+    <!-- EXTRAS PANE -->
+    <div class="s-tab-pane" id="tab-extras">
+      <div class="s-grid-layout">
+        <div class="s-section">
+          <div class="s-section-title"><i class="fas fa-star"></i>ميزات إضافية للمتصفح المحلي</div>
+          <div class="s-row"><label class="s-label">💾 الحفظ التلقائي للاستئناف (Auto-Save)</label><label class="toggle"><input type="checkbox" id="ext-autosave"><span class="tslider"></span></label></div>
+          <div class="s-row"><label class="s-label">🔊 تفعيل المؤثرات الصوتية</label><label class="toggle"><input type="checkbox" id="ext-sound"><span class="tslider"></span></label></div>
+          <div class="s-row"><label class="s-label">🗣️ تفعيل القارئ الصوتي للأسئلة</label><label class="toggle"><input type="checkbox" id="ext-tts"><span class="tslider"></span></label></div>
+        </div>
+        <div class="s-section">
+          <div class="s-section-title"><i class="fas fa-print"></i>طباعة وتصدير</div>
+          <button type="button" class="qm-btn blue" onclick="showPrintModal()"><i class="fas fa-print"></i> طباعة نسخة ورقية من الامتحان</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ SCREEN: QUESTION MANAGER ══════════ -->
+<div id="s-questions" class="screen">
+  <div class="qm-bar">
+    <span style="font-size:1.2rem">📝</span>
+    <div class="qm-title">إدارة بنك الأسئلة</div>
+    <div class="qm-count" id="qm-count-badge">0</div>
+    <button type="button" class="qm-btn blue" onclick="exportEncryptedQuestions()"><i class="fas fa-lock"></i> تصدير للطلاب (مشفر)</button>
+    <button type="button" class="qm-btn green" onclick="exportQuestions()">⬇️ تصدير JSON</button>
+    <button type="button" class="qm-btn blue" onclick="document.getElementById('import-json-file').click()">📂 استيراد ملف</button>
+    <input type="file" id="import-json-file" accept=".json,.epx" style="display:none" onchange="importJSONFile(event)">
+    <button type="button" class="qm-btn red" onclick="clearAllQuestions()">🗑️ حذف الكل</button>
+    <button type="button" class="qm-btn gray" onclick="showScreen('s-settings')">↩ الإعدادات</button>
+  </div>
+  <div class="qm-body">
+    <div class="qm-tabs">
+      <div class="qm-tab active" id="tab-btn-bank" onclick="switchQMTab('bank')"><i class="fas fa-list"></i> البنك (<span id="tab-q-cnt">0</span>)</div>
+      <div class="qm-tab" id="tab-btn-add" onclick="switchQMTab('add')"><i class="fas fa-plus"></i> إضافة سؤال</div>
+      <div class="qm-tab" id="tab-btn-import" onclick="switchQMTab('import')"><i class="fas fa-file-import"></i> استيراد ذكي</div>
+    </div>
+
+    <!-- BANK TAB -->
+    <div class="qm-tab-panel active" id="qm-tab-bank">
+      <div style="display:flex;gap:10px;margin-bottom:14px">
+        <div style="position:relative;flex:1"><i class="fas fa-search" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text3)"></i><input type="text" id="q-search-inp" onkeyup="renderQList()" placeholder="ابحث في الأسئلة..." style="width:100%;background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;padding:10px 38px 10px 14px;color:var(--text);font-family:'Cairo',sans-serif;font-size:.88rem;outline:none"></div>
+      </div>
+      <div class="q-list-wrap" id="q-list-container">
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24"><path d="M9 13h6v2H9zM9 17h6v2H9zM19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
+          <h3>لا توجد أسئلة</h3>
+          <p>أضف أسئلة جديدة أو قم باستيرادها للبدء.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD TAB -->
+    <div class="qm-tab-panel" id="qm-tab-add">
+      <div class="add-form-card">
+        <div class="add-form-title">
+          <span id="add-form-label"><i class="fas fa-plus-circle" style="color:var(--blue2)"></i> إضافة سؤال جديد</span>
+          <button type="button" id="cancel-edit-btn" style="display:none;background:var(--red);border:none;color:#fff;padding:5px 12px;border-radius:7px;font-family:'Cairo',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer" onclick="cancelEdit()">إلغاء التعديل</button>
+        </div>
+        <input type="hidden" id="editing-idx" value="-1">
+        
+        <div class="q-img-upload-bar">
+          <button type="button" class="qm-btn gray" onclick="document.getElementById('q-img-file').click()" style="padding:6px 12px; font-size:.75rem;"><i class="fas fa-image"></i> إرفاق صورة مع السؤال</button>
+          <input type="file" id="q-img-file" accept="image/*" style="display:none" onchange="handleQImageUpload(event)">
+          <img id="q-img-preview-el" class="q-img-preview" src="" alt="preview">
+          <button type="button" id="q-img-remove-btn" style="display:none;background:none;border:none;color:var(--red);cursor:pointer;" onclick="removeQImage()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div style="margin-bottom:12px">
+          <div class="s-label" style="margin-bottom:6px">نوع السؤال</div>
+          <select id="q-type" class="s-select" style="width:100%" onchange="handleQTypeChange()">
+            <option value="mcq">اختيار من متعدد (إجابة واحدة)</option>
+            <option value="msq">متعدد الإجابات (أكثر من إجابة صحيحة)</option>
+            <option value="tf">صح / خطأ</option>
+            <option value="short">إجابة قصيرة (نص)</option>
+          </select>
+        </div>
+
+        <div class="rt-toolbar" style="display:flex;gap:5px;background:var(--bg3);padding:8px;border:1.5px solid var(--border);border-bottom:none;border-radius:10px 10px 0 0;">
+          <button type="button" class="rt-btn" onclick="document.execCommand('bold', false, null)" title="عريض"><i class="fas fa-bold"></i></button>
+          <button type="button" class="rt-btn" onclick="document.execCommand('italic', false, null)" title="مائل"><i class="fas fa-italic"></i></button>
+          <button type="button" class="rt-btn" onclick="document.execCommand('underline', false, null)" title="تسطير"><i class="fas fa-underline"></i></button>
+          <span style="width:1px;height:20px;background:var(--border);margin:0 5px"></span>
+          <button type="button" class="rt-btn" onclick="document.execCommand('foreColor', false, '#ef4444')" style="color:#ef4444"><i class="fas fa-palette"></i></button>
+          <button type="button" class="rt-btn" onclick="document.execCommand('foreColor', false, '#3b82f6')" style="color:#3b82f6"><i class="fas fa-palette"></i></button>
+          <button type="button" class="rt-btn" onclick="document.execCommand('foreColor', false, '#10b981')" style="color:#10b981"><i class="fas fa-palette"></i></button>
+          <button type="button" class="rt-btn" onclick="document.execCommand('foreColor', false, '#ffffff')" style="color:#ffffff;background:#222;border-radius:4px;"><i class="fas fa-palette"></i></button>
+          <span style="width:1px;height:20px;background:var(--border);margin:0 5px"></span>
+          <button type="button" class="rt-btn" onclick="insertMathEquation()" style="color:var(--purple);font-family:'Cairo';font-weight:600"><i class="fas fa-square-root-variable"></i> معادلة</button>
+        </div>
+        <div id="q-text-inp" class="q-textarea" contenteditable="true" placeholder="اكتب نص السؤال هنا..." style="border-radius:0 0 10px 10px;min-height:100px;"></div>
+        
+        <div id="opts-area">
+          <div class="opts-form-grid" id="opts-form-grid">
+            <div class="opt-form-row"><div class="opt-letter-badge" style="color:var(--blue2)">A</div><input type="text" id="opt-inp-a" class="opt-form-input" placeholder="الخيار أ"></div>
+            <div class="opt-form-row"><div class="opt-letter-badge" style="color:var(--green)">B</div><input type="text" id="opt-inp-b" class="opt-form-input" placeholder="الخيار ب"></div>
+            <div class="opt-form-row"><div class="opt-letter-badge" style="color:var(--gold)">C</div><input type="text" id="opt-inp-c" class="opt-form-input" placeholder="الخيار ج"></div>
+            <div class="opt-form-row"><div class="opt-letter-badge" style="color:var(--red)">D</div><input type="text" id="opt-inp-d" class="opt-form-input" placeholder="الخيار د"></div>
+          </div>
+          <div class="correct-row" id="correct-row">
+            <span class="correct-label">✅ الإجابة الصحيحة:</span>
+            <div class="correct-radio-group" id="correct-group">
+              <label class="correct-radio"><input type="radio" name="correct-opt" value="0"><div class="cr-box">أ</div></label>
+              <label class="correct-radio"><input type="radio" name="correct-opt" value="1"><div class="cr-box">ب</div></label>
+              <label class="correct-radio"><input type="radio" name="correct-opt" value="2"><div class="cr-box">ج</div></label>
+              <label class="correct-radio"><input type="radio" name="correct-opt" value="3"><div class="cr-box">د</div></label>
+            </div>
+          </div>
+        </div>
+
+        <div id="short-ans-area" style="display:none; margin-bottom:15px; margin-top:15px;">
+           <div class="s-label" style="margin-bottom:6px">الإجابة النموذجية (النص):</div>
+           <input type="text" id="short-ans-inp" class="s-input" style="width:100%" placeholder="اكتب الإجابة القصيرة الصحيحة هنا...">
+           <div style="font-size:0.7rem;color:var(--text3);margin-top:5px;">ملاحظة: سيتم تجاهل المسافات الزائدة وحالة الأحرف أثناء التصحيح.</div>
+        </div>
+        <button type="button" class="add-q-btn" id="add-q-btn-el" onclick="submitQuestion()"><i class="fas fa-plus-circle"></i> إضافة السؤال للبنك</button>
+        <!-- Difficulty + Explanation -->
+        <div style="display:grid;grid-template-columns:1fr 2fr;gap:12px;margin-top:14px;padding-top:14px;border-top:1px dashed var(--border)">
+          <div>
+            <div class="s-label" style="margin-bottom:6px">مستوى الصعوبة</div>
+            <select id="q-difficulty" class="s-select" style="width:100%">
+              <option value="medium">متوسط</option>
+              <option value="easy">سهل</option>
+              <option value="hard">صعب</option>
+            </select>
+          </div>
+          <div>
+            <div class="s-label" style="margin-bottom:6px">تصنيف / موضوع (اختياري)</div>
+            <input type="text" id="q-category" class="s-input" placeholder="مثال: الفصل الثالث" style="width:100%">
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <div class="s-label" style="margin-bottom:6px">💡 تفسير الإجابة الصحيحة (اختياري)</div>
+          <textarea id="q-explanation" class="q-textarea" style="min-height:70px" placeholder="اشرح لماذا هذه الإجابة صحيحة... (يظهر للطالب في مراجعة النتائج)"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPORT TAB -->
+    <div class="qm-tab-panel" id="qm-tab-import">
+      <!-- Smart Text -->
+      <div class="import-card">
+        <div class="import-card-title" style="color:var(--blue2)">
+          <span><i class="fas fa-magic"></i> الاستيراد الذكي — نص حر (Word/TXT)</span>
+          <div style="display:flex;gap:5px;">
+            <button type="button" class="tpl-btn" onclick="copyPromptChatGPT()" style="width:auto;padding:6px 12px;font-size:.75rem;background:var(--purple);color:white;border:none;"><i class="fas fa-robot"></i> برومبت الذكاء الاصطناعي</button>
+            <button type="button" class="tpl-btn" onclick="downloadTextTemplate()" style="width:auto;padding:6px 12px;font-size:.75rem"><i class="fas fa-download"></i> قالب</button>
+          </div>
+        </div>
+        <div class="import-hint">
+          <strong>الصيغ المدعومة تلقائياً:</strong><br>
+          • ضع <code style="color:var(--blue2)">*</code> أو <code style="color:var(--blue2)">#</code> أو <code style="color:var(--blue2)">&gt;</code> قبل الإجابة الصحيحة<br>
+          • أو اكتب <code style="color:var(--blue2)">الجواب: أ</code> أو <code style="color:var(--blue2)">Correct: B</code> بعد الخيارات<br>
+          • أو ضع <code style="color:var(--blue2)">✓</code> أو <code style="color:var(--blue2)">[صح]</code> بجانب الخيار الصحيح<br>
+          • افصل الأسئلة بسطر فارغ أو بترقيم واضح (مثل 1. أو س1:)<br>
+          <span style="color:var(--red2);font-weight:bold;font-size:.75rem;margin-top:4px;display:inline-block;"><i class="fas fa-info-circle"></i> الأجزاء التي لم يتعرف عليها النظام ستبقى في الصندوق لتصحيحها والمحاولة مرة أخرى.</span>
+        </div>
+        <textarea id="txt-import-area" class="import-textarea" placeholder="ما هي عاصمة الأردن؟&#10;* عمان&#10;إربد&#10;العقبة&#10;الزرقاء&#10;&#10;كم عدد كواكب المجموعة الشمسية؟&#10;6&#10;7&#10;* 8&#10;9"></textarea>
+        <button type="button" class="import-btn blue" onclick="parseSmartText()"><i class="fas fa-bolt"></i> تحليل وإضافة الأسئلة تلقائياً</button>
+      </div>
+      <!-- Excel Paste -->
+      <div class="import-card">
+        <div class="import-card-title" style="color:var(--green2)">
+          <span><i class="fas fa-file-excel"></i> الاستيراد من Excel (لصق مباشر)</span>
+          <button type="button" class="tpl-btn" onclick="downloadCSVTemplate()" style="width:auto;padding:6px 12px;font-size:.75rem"><i class="fas fa-download"></i> قالب CSV</button>
+        </div>
+        <div class="import-hint" style="color:var(--green2)">
+          <strong>ترتيب الأعمدة:</strong> السؤال | أ | ب | ج | د | رقم الصواب (1-4)<br>
+          انسخ النطاق من Excel والصق هنا
+        </div>
+        <textarea id="excel-import-area" class="import-textarea" placeholder="انسخ الجدول من Excel والصق هنا (Ctrl+V)..."></textarea>
+        <button type="button" class="import-btn green" onclick="parseExcelPaste()"><i class="fas fa-table"></i> معالجة جدول Excel</button>
+      </div>
+    <!-- JSON Import -->
+      <div class="import-card">
+        <div class="import-card-title" style="color:var(--gold)">
+          <span><i class="fas fa-code"></i> الاستيراد من JSON</span>
+          <button type="button" class="tpl-btn" onclick="downloadJSONTemplate()" style="width:auto;padding:6px 12px;font-size:.75rem"><i class="fas fa-download"></i> قالب JSON</button>
+        </div>
+        <textarea id="json-import-area" class="import-textarea" placeholder="لصق كود JSON هنا..."></textarea>
+        <button type="button" class="import-btn gold" onclick="parseJSONText()" style="background:var(--blue); color:white;"><i class="fas fa-file-code"></i> معالجة JSON</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODALS ══════════ -->
+<!-- Confirm Submit -->
+<div class="modal-overlay" id="modal-confirm">
+  <div class="modal-box" style="max-width:750px;width:95%;text-align:center;padding:34px;">
+    <div style="font-size:58px;margin-bottom:14px">📤</div>
+    <div class="modal-title" style="justify-content:center;font-size:1.5rem">تأكيد تسليم الامتحان</div>
+    <div style="color:var(--text2);margin-bottom:20px;line-height:1.7" id="confirm-submit-msg"></div>
+    <div class="modal-btns">
+      <button type="button" class="modal-btn confirm" onclick="submitExam()">✅ نعم، تسليم الامتحان</button>
+      <button type="button" class="modal-btn cancel" onclick="closeModal('modal-confirm')">← العودة للأسئلة</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: RETRY WRONG ANSWER -->
+<div class="modal-overlay" id="modal-retry">
+  <div class="modal-box" style="max-width:700px; padding: 30px;">
+    <button type="button" onclick="closeModal('modal-retry')" style="position:absolute;top:15px;left:15px;background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer;"><i class="fas fa-times"></i></button>
+    <div class="modal-title"><i class="fas fa-redo" style="color:var(--blue2)"></i> إعادة المحاولة لتصحيح الخطأ</div>
+    <p style="font-size:0.8rem; color:var(--text3); margin-bottom:15px;">اختر الإجابة التي تعتقد أنها صحيحة للتعلم من خطأك.</p>
+    
+    <div id="retry-q-img" style="text-align:center;margin-bottom:15px"></div>
+    <div id="retry-q-text" style="font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:24px;line-height:1.6;border-bottom:1px solid var(--border2);padding-bottom:15px;"></div>
+    <div id="retry-opts" style="display:flex;flex-direction:column;gap:10px;"></div>
+    
+    <div id="retry-msg" style="margin-top:20px; font-weight:800; text-align:center; font-size:1.1rem; min-height: 30px;"></div>
+  </div>
+</div>
+
+<!-- Grid Modal -->
+<div class="modal-overlay" id="modal-grid">
+  <div class="modal-box" style="max-width:620px">
+    <button type="button" onclick="closeModal('modal-grid')" style="position:absolute;top:16px;left:16px;background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer"><i class="fas fa-times"></i></button>
+    <div class="modal-title"><i class="fas fa-th" style="color:var(--blue2)"></i> خريطة الأسئلة التفاعلية</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;font-size:.76rem;font-weight:700;color:var(--text3);background:var(--bg2);padding:10px 14px;border-radius:10px">
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:50%;background:var(--bg3);border:1.5px solid var(--border);display:inline-block"></span>لم يُجَب</span>
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:50%;background:var(--green);display:inline-block"></span>أُجيب عليه</span>
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:50%;background:var(--gold);display:inline-block"></span>للمراجعة</span>
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:50%;background:var(--blue);display:inline-block"></span>الحالي</span>
+    </div>
+    <div id="grid-buttons-area" style="display:grid;grid-template-columns:repeat(8,1fr);gap:7px;max-height:45vh;overflow-y:auto"></div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:flex-end">
+      <button type="button" onclick="closeModal('modal-grid')" class="ef-btn primary">العودة للامتحان</button>
+    </div>
+  </div>
+</div>
+
+<!-- Calculator Float -->
+<div id="calc-float" style="display:none" class="calc-float">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <div style="font-size:.85rem;font-weight:700;color:var(--text2)"><i class="fas fa-calculator" style="color:var(--blue2)"></i> الحاسبة</div>
+    <button type="button" onclick="toggleCalc()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:1rem"><i class="fas fa-times"></i></button>
+  </div>
+  <input id="calc-display" class="calc-disp" value="0" readonly>
+  <div class="calc-grid">
+    <button type="button" class="calc-key cl" onclick="calcAction('C')" style="grid-column:span 2">C</button>
+    <button type="button" class="calc-key op" onclick="calcAction('%')">%</button>
+    <button type="button" class="calc-key op" onclick="calcAction('/')">÷</button>
+    <button type="button" class="calc-key num" onclick="calcAction('7')">7</button>
+    <button type="button" class="calc-key num" onclick="calcAction('8')">8</button>
+    <button type="button" class="calc-key num" onclick="calcAction('9')">9</button>
+    <button type="button" class="calc-key op" onclick="calcAction('*')">×</button>
+    <button type="button" class="calc-key num" onclick="calcAction('4')">4</button>
+    <button type="button" class="calc-key num" onclick="calcAction('5')">5</button>
+    <button type="button" class="calc-key num" onclick="calcAction('6')">6</button>
+    <button type="button" class="calc-key op" onclick="calcAction('-')">−</button>
+    <button type="button" class="calc-key num" onclick="calcAction('1')">1</button>
+    <button type="button" class="calc-key num" onclick="calcAction('2')">2</button>
+    <button type="button" class="calc-key num" onclick="calcAction('3')">3</button>
+    <button type="button" class="calc-key op" onclick="calcAction('+')">+</button>
+    <button type="button" class="calc-key num" onclick="calcAction('0')">0</button>
+    <button type="button" class="calc-key num" onclick="calcAction('.')">.</button>
+    <button type="button" class="calc-key eq" onclick="calcAction('=')">=</button>
+  </div>
+</div>
+<script src="js/vendor/crypto-js.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/online_logic.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const cleanText = (str) => {
+        if (typeof str !== 'string') return str;
+        return str.replace(/&nbsp;/g, ' ')
+                  .replace(/&amp;nbsp;/g, ' ')
+                  .replace(/؛nbsp&/g, ' ')
+                  .replace(/\?nbsp&/g, ' ?')
+                  .replace(/nbsp&/g, ' ');
+    };
+
+    const walkAndClean = (node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+            const cleaned = cleanText(node.nodeValue);
+            if (cleaned !== node.nodeValue) {
+                node.nodeValue = cleaned;
+            }
+        } else if (node.nodeType === Node.ELEMENT_NODE && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE' && node.nodeName !== 'NOSCRIPT') {
+            node.childNodes.forEach(child => walkAndClean(child));
+        }
+    };
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(node => walkAndClean(node));
+            } else if (mutation.type === 'characterData') {
+                const cleaned = cleanText(mutation.target.nodeValue);
+                if (cleaned !== mutation.target.nodeValue) {
+                    mutation.target.nodeValue = cleaned;
+                }
+            }
+        });
+    });
+
+    walkAndClean(document.body);
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+});
+
+// سكربت الميزات الإضافية للمتصفح المحلي
+(function() {
+    const extCfg = JSON.parse(localStorage.getItem('ep4_ext_cfg') || '{"autosave":true, "sound":true, "tts":true}');
+    
+    const initExt = () => {
+        const chkAutoSave = document.getElementById('ext-autosave');
+        const chkSound = document.getElementById('ext-sound');
+        const chkTts = document.getElementById('ext-tts');
+        
+        if(chkAutoSave) chkAutoSave.checked = extCfg.autosave;
+        if(chkSound) chkSound.checked = extCfg.sound;
+        if(chkTts) chkTts.checked = extCfg.tts;
+
+        const saveCfg = () => {
+            if(chkAutoSave) extCfg.autosave = chkAutoSave.checked;
+            if(chkSound) extCfg.sound = chkSound.checked;
+            if(chkTts) extCfg.tts = chkTts.checked;
+            localStorage.setItem('ep4_ext_cfg', JSON.stringify(extCfg));
+        };
+
+        [chkAutoSave, chkSound, chkTts].forEach(el => el && el.addEventListener('change', saveCfg));
+
+        const playClick = () => {
+            if(extCfg.sound) {
+                try {
+                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.frequency.setValueAtTime(600, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.05, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.1);
+                } catch(e) {}
+            }
+        };
+
+        document.addEventListener('click', (e) => {
+            if(e.target.closest('label') || e.target.closest('button') || e.target.closest('.opt-card')) {
+                playClick();
+            }
+        });
+
+        let ttsBtn = null;
+        const addTtsButton = () => {
+            if(!extCfg.tts) return;
+            const toolsBar = document.getElementById('etb-tools');
+            if(toolsBar && !document.getElementById('ext-tts-btn')) {
+                ttsBtn = document.createElement('button');
+                ttsBtn.type = 'button';
+                ttsBtn.id = 'ext-tts-btn';
+                ttsBtn.className = 'tool-btn';
+                ttsBtn.innerHTML = '<i class="fas fa-volume-up"></i><span class="hide-sm">قراءة</span>';
+                ttsBtn.onclick = () => {
+                    const qCard = document.getElementById('q-card');
+                    if(qCard) {
+                        const text = qCard.innerText || qCard.textContent;
+                        const u = new SpeechSynthesisUtterance(text);
+                        u.lang = 'ar-SA';
+                        window.speechSynthesis.cancel();
+                        window.speechSynthesis.speak(u);
+                    }
+                };
+                toolsBar.insertBefore(ttsBtn, toolsBar.firstChild);
+            }
+        };
+
+        const LS_STATE = 'ep4_ext_autosave';
+        document.addEventListener('change', (e) => {
+            if(extCfg.autosave && e.target.tagName === 'INPUT' && e.target.type === 'radio') {
+                const state = JSON.parse(localStorage.getItem(LS_STATE) || '{}');
+                state[e.target.name] = e.target.value;
+                localStorage.setItem(LS_STATE, JSON.stringify(state));
+            }
+        });
+
+        const examObserver = new MutationObserver(() => {
+            addTtsButton();
+            if(extCfg.autosave) {
+                const state = JSON.parse(localStorage.getItem(LS_STATE) || '{}');
+                const radios = document.querySelectorAll('input[type="radio"]');
+                radios.forEach(radio => {
+                    if(state[radio.name] === radio.value && !radio.checked) {
+                        radio.checked = true;
+                        radio.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                });
+            }
+        });
+        
+        const qCardContainer = document.getElementById('exam-body');
+        if(qCardContainer) {
+            examObserver.observe(qCardContainer, { childList: true, subtree: true });
+        }
+        
+        const origSubmit = window.submitExam;
+        if(typeof origSubmit === 'function') {
+            window.submitExam = function() {
+                localStorage.removeItem(LS_STATE);
+                return origSubmit.apply(this, arguments);
+            };
+        }
+    };
+
+    window.showPrintModal = function() {
+        let modal = document.getElementById('modal-print-setup');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'modal-print-setup';
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+              <div class="modal-box" style="max-width:500px">
+                <button type="button" onclick="document.getElementById('modal-print-setup').classList.remove('show')" style="position:absolute;top:16px;left:16px;background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer"><i class="fas fa-times"></i></button>
+                <div class="modal-title"><i class="fas fa-print" style="color:var(--blue2)"></i> إعدادات الطباعة</div>
+                <div style="margin-bottom: 15px; text-align:right;">
+                    <label style="display:block;margin-bottom:5px;font-size:14px;color:var(--text2)">اليوم والتاريخ:</label>
+                    <input type="text" id="print-inp-date" class="ef-input" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); background:var(--bg2); color:var(--text);" placeholder="مثال: الأحد 20/5/2026">
+                </div>
+                <div style="margin-bottom: 15px; text-align:right;">
+                    <label style="display:block;margin-bottom:5px;font-size:14px;color:var(--text2)">الصف والشعبة:</label>
+                    <input type="text" id="print-inp-class" class="ef-input" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); background:var(--bg2); color:var(--text);" placeholder="مثال: العاشر (أ)">
+                </div>
+                <div style="margin-bottom: 15px; text-align:right;">
+                    <label style="display:block;margin-bottom:5px;font-size:14px;color:var(--text2)">المبحث (المادة):</label>
+                    <input type="text" id="print-inp-subject" class="ef-input" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); background:var(--bg2); color:var(--text);" placeholder="اسم المادة">
+                </div>
+                <div style="margin-bottom: 25px; text-align:right;">
+                    <label style="display:block;margin-bottom:5px;font-size:14px;color:var(--text2)">شعار المدرسة (صورة اختياري):</label>
+                    <input type="file" id="print-inp-logo" accept="image/*" class="ef-input" style="width:100%; padding:5px; border-radius:8px; border:1px solid var(--border); background:var(--bg2); color:var(--text);">
+                </div>
+                <div class="modal-btns" style="display:flex; justify-content:center;">
+                    <button type="button" class="ef-btn primary" onclick="executePrint()" style="width:100%; padding:12px; font-size:16px; border-radius:8px; background:var(--blue); color:#fff; border:none; cursor:pointer;">🖨️ طباعة الآن</button>
+                </div>
+              </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        try { if(typeof closeModal === 'function') closeModal('modal-settings'); } catch(e) {}
+        
+        const myIdbGet = (key) => new Promise((resolve) => {
+            let resolved = false;
+            const res = (val) => { if(!resolved){ resolved=true; resolve(val); } };
+            const req = indexedDB.open('ExamPro_DB', 1);
+            req.onsuccess = e => {
+                const db = e.target.result;
+                if(!db.objectStoreNames.contains('store')) { db.close(); return res(null); }
+                try {
+                    const tx = db.transaction('store', 'readonly');
+                    const getReq = tx.objectStore('store').get(key);
+                    getReq.onsuccess = () => { db.close(); res(getReq.result); };
+                    getReq.onerror = () => { db.close(); res(null); };
+                } catch(err) { db.close(); res(null); }
+            };
+            req.onerror = () => res(null);
+            setTimeout(() => res(null), 800);
+        });
+        
+        myIdbGet('ep4_cfg').then(cfgStr => {
+            let cfg = cfgStr;
+            if (typeof cfg === 'string') { try { cfg = JSON.parse(cfg); } catch(e){} }
+            if (!cfg) { try { cfg = JSON.parse(localStorage.getItem('ep4_cfg') || '{}'); } catch(e){} }
+            if(cfg && cfg.subjectName) {
+                const subjInp = document.getElementById('print-inp-subject');
+                if(subjInp && !subjInp.value) subjInp.value = cfg.subjectName;
+            }
+        });
+
+        modal.classList.add('show');
+    };
+
+    window.executePrint = async function() {
+        try {
+            document.getElementById('modal-print-setup').classList.remove('show');
+            
+            const fileInput = document.getElementById('print-inp-logo');
+            let logoDataUrl = null;
+            if (fileInput && fileInput.files && fileInput.files[0]) {
+                logoDataUrl = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.onerror = () => resolve(null);
+                    reader.readAsDataURL(fileInput.files[0]);
+                });
+            }
+
+            const pDate = document.getElementById('print-inp-date').value || '__________________';
+            const pClass = document.getElementById('print-inp-class').value || '__________________';
+            const pSubj = document.getElementById('print-inp-subject').value || '__________________';
+            
+            await generatePrintView(pDate, pClass, pSubj, logoDataUrl);
+        } catch(e) {
+            alert("حدث خطأ أثناء تجهيز الطباعة: " + e.message);
+        }
+    };
+
+    window.generatePrintView = async function(pDate, pClass, pSubj, logoDataUrl) {
+        const cleanTxt = (str) => {
+            if(typeof str !== 'string') return str;
+            return str.replace(/&nbsp;/g, ' ').replace(/&amp;nbsp;/g, ' ').replace(/؛nbsp&/g, ' ').replace(/\?nbsp&/g, ' ?').replace(/nbsp&/g, ' ');
+        };
+
+        const myIdbGet = (key) => new Promise((resolve) => {
+            let resolved = false;
+            const res = (val) => { if(!resolved){ resolved=true; resolve(val); } };
+            const req = indexedDB.open('ExamPro_DB', 1);
+            req.onsuccess = e => {
+                const db = e.target.result;
+                if(!db.objectStoreNames.contains('store')) { db.close(); return res(null); }
+                try {
+                    const tx = db.transaction('store', 'readonly');
+                    const getReq = tx.objectStore('store').get(key);
+                    getReq.onsuccess = () => { db.close(); res(getReq.result); };
+                    getReq.onerror = () => { db.close(); res(null); };
+                } catch(err) { db.close(); res(null); }
+            };
+            req.onerror = () => res(null);
+            setTimeout(() => res(null), 1000);
+        });
+
+        const appScreens = document.querySelectorAll('.screen');
+        appScreens.forEach(s => s.classList.add('no-print-screen'));
+
+        let printZone = document.getElementById('paper-print-zone');
+        if(printZone) printZone.remove();
+        printZone = document.createElement('div');
+        printZone.id = 'paper-print-zone';
+
+        let cfg = {};
+        if (typeof window.getAppCfg === 'function') {
+            cfg = window.getAppCfg() || {};
+        } else {
+            let cfgStr = await myIdbGet('ep4_cfg');
+            cfg = cfgStr;
+            if (typeof cfg === 'string') { try { cfg = JSON.parse(cfg); } catch(e){} }
+            if (!cfg) { try { cfg = JSON.parse(localStorage.getItem('ep4_cfg') || '{}'); } catch(e){} }
+        }
+        
+        cfg = cfg || {};
+        const schoolName = cfg.schoolName || 'اسم المدرسة';
+        const teacherName = cfg.teacherName || 'اسم المعلم';
+        const timerMins = cfg.timerMins || '--';
+        const totalExamMark = cfg.totalExamMark || '--';
+
+        let qs = [];
+        if (typeof window.getAppQuestions === 'function') {
+            qs = window.getAppQuestions();
+        } else {
+            try {
+                const idbData = await myIdbGet('ep4_q_enc');
+                if (Array.isArray(idbData)) {
+                    qs = idbData;
+                } else if (typeof idbData === 'string') {
+                    const bytes = CryptoJS.AES.decrypt(idbData, "EdU_D3sk_S3cr3t_2026!");
+                    const dec = bytes.toString(CryptoJS.enc.Utf8);
+                    if(dec) qs = JSON.parse(dec);
+                }
+                
+                if (!qs || qs.length === 0) {
+                    const enc = localStorage.getItem('ep4_q_enc');
+                    if (enc) {
+                        const bytes = CryptoJS.AES.decrypt(enc, "EdU_D3sk_S3cr3t_2026!");
+                        const dec = bytes.toString(CryptoJS.enc.Utf8);
+                        if(dec) qs = JSON.parse(dec);
+                    }
+                }
+            } catch(e) {
+                console.error("Error fetching questions", e);
+            }
+        }
+
+        if(!qs || qs.length === 0) {
+            alert('لا توجد أسئلة لطباعتها!');
+            appScreens.forEach(s => s.classList.remove('no-print-screen'));
+            return;
+        }
+
+        let logoHtml = logoDataUrl 
+            ? `<img src="${logoDataUrl}" style="max-width:80px; max-height:80px; object-fit:contain;">`
+            : `<div style="width: 80px; height: 80px; border: 2px dashed #999; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #666; border-radius: 8px;">مكان الشعار</div>`;
+
+        let html = `
+        <div class="print-header">
+            <div class="ph-row">
+                <div class="ph-col">
+                    <strong>المدرسة:</strong> ${schoolName}<br>
+                    <strong>المعلم:</strong> ${teacherName}<br>
+                    <strong>زمن الامتحان:</strong> ${timerMins} دقيقة
+                </div>
+                <div class="ph-logo">
+                    ${logoHtml}
+                </div>
+                <div class="ph-col text-left">
+                    <strong>اليوم والتاريخ:</strong> ${pDate}<br>
+                    <strong>الصف والشعبة:</strong> ${pClass}<br>
+                    <strong>المبحث (المادة):</strong> ${pSubj}
+                </div>
+            </div>
+            <div class="ph-title" style="margin-top: 5px;">امتحان نهاية الفصل الدراسي</div>
+            <div class="ph-student-box">
+                <div><strong>اسم الطالب الرباعي:</strong> __________________________________________________</div>
+                <div class="ph-grade-box">
+                    <div style="font-size:10px;">العلامة</div>
+                    <div style="height:35px;"></div>
+                    <div style="border-top:1px solid #000; font-size:12px;">من ${totalExamMark}</div>
+                </div>
+            </div>
+        </div>
+        <div class="print-body">`;
+
+        qs.forEach((q, idx) => {
+            html += `<div class="pq-card">
+                <div class="pq-title"><strong>السؤال ${idx+1}:</strong> ${cleanTxt(q.text || '')}</div>`;
+            if(q.image) html += `<div class="pq-img"><img src="${q.image}" style="max-width:300px; max-height:200px;"></div>`;
+            if(q.options && q.options.length > 0) {
+                html += `<div class="pq-options">`;
+                q.options.forEach((opt, oIdx) => {
+                    const letter = ['أ', 'ب', 'ج', 'د', 'هـ', 'و'][oIdx] || '*';
+                    const oText = typeof opt === 'string' ? opt : (opt.text || '');
+                    html += `<div class="pq-opt"><span class="pq-opt-circle">${letter}</span> ${cleanTxt(oText)}</div>`;
+                });
+                html += `</div>`;
+            } else {
+                html += `<div class="pq-textarea"></div>`;
+            }
+            html += `</div>`;
+        });
+        html += `</div>`;
+        printZone.innerHTML = html;
+        document.body.appendChild(printZone);
+
+        if(!document.getElementById('paper-print-style')) {
+            const style = document.createElement('style');
+            style.id = 'paper-print-style';
+            style.innerHTML = `
+                @media screen { #paper-print-zone { display: none !important; } }
+                @media print {
+                    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+                    body { background: #fff !important; margin: 0; padding: 0; direction: rtl; font-family: 'Cairo', sans-serif; }
+                    .screen, .no-print-screen, .app-container { display: none !important; opacity: 0 !important; visibility: hidden !important; }
+                    #paper-print-zone { 
+                        display: block !important; 
+                        position: absolute !important; 
+                        top: 0 !important; 
+                        left: 0 !important; 
+                        width: 100% !important; 
+                        color: #000 !important; 
+                        background: #fff !important; 
+                        visibility: visible !important; 
+                        z-index: 999999 !important;
+                    }
+                    #paper-print-zone * { color: #000 !important; visibility: visible !important; }
+                    .print-header { border: 2px solid #000 !important; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
+                    .ph-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 14px; }
+                    .ph-col { flex: 1; line-height: 1.8; }
+                    .ph-logo { flex: 0 0 80px; text-align: center; }
+                    .text-left { text-align: left; }
+                    .ph-title { text-align: center; font-size: 22px; font-weight: bold; margin-bottom: 15px; text-decoration: underline; text-underline-offset: 5px; }
+                    .ph-student-box { border-top: 1px dashed #000; padding-top: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 16px; }
+                    .ph-grade-box { border: 2px solid #000 !important; width: 80px; text-align: center; border-radius: 5px; overflow: hidden; }
+                    .pq-card { margin-bottom: 25px; break-inside: avoid; page-break-inside: avoid; border-bottom: 1px solid #ccc; padding-bottom: 15px; }
+                    .pq-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; line-height: 1.6; }
+                    .pq-img { margin-bottom: 10px; text-align: center; }
+                    .pq-options { display: flex; flex-direction: column; gap: 8px; margin-right: 20px; }
+                    .pq-opt { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+                    .pq-opt-circle { display: inline-block; width: 22px; height: 22px; border: 1px solid #000 !important; border-radius: 50%; text-align: center; line-height: 20px; font-size: 12px; font-weight: bold; }
+                    .pq-textarea { border: 1px dashed #999 !important; height: 100px; border-radius: 5px; margin-top: 10px; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        setTimeout(() => {
+            window.print();
+            setTimeout(() => {
+                printZone.remove();
+                appScreens.forEach(s => s.classList.remove('no-print-screen'));
+            }, 1000);
+        }, 500);
+    };
+
+})();
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then((registration) => {
+          console.log('[Service Worker] Registered successfully with scope:', registration.scope);
+        })
+        .catch((error) => {
+          console.error('[Service Worker] Registration failed:', error);
+        });
+    });
+  }
+</script>
+</body>
+</html>

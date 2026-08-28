@@ -1,0 +1,44 @@
+{
+  "name": "exampro-elite",
+  "version": "1.0.0",
+  "description": "نظام الامتحانات الإلكتروني المتقدم للمدارس",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "EduDesk Solutions",
+  "license": "ISC",
+  "build": {
+    "appId": "com.edudesk.exampro",
+    "productName": "ExamPro Elite",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "icons/icon-512x512.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "icons/icon-512x512.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^44.0.0",
+    "electron-builder": "^26.15.3"
+  },
+  "dependencies": {
+    "body-parser": "^2.3.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sqlite3": "^5.1.7"
+  }
+}
